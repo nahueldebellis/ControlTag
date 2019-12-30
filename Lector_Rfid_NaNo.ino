@@ -2,13 +2,11 @@
 #include <SD.h>
 #include <MFRC522.h>
 #include "tag.h"
-#include "sd_manager.h";
 
 #define SDA 10
 #define SDA_2 8
 #define RST 9
 #define RELE 4
-#define SD_CARD 3
 
 
 //keys[4] = "197 239 203 45";
@@ -22,10 +20,8 @@ void setup() {
   SPI.begin();
   rfid_1.PCD_Init(); 
   rfid_2.PCD_Init(); 
-  if(!SD.begin(SD_CARD))
-    Serial.println("Error initializing sd card");
+  
   Serial.println("Working.....");
-
 }
 
 void loop(){
@@ -44,7 +40,7 @@ void check_incomin_tag (MFRC522 rfid){
     Serial.println("Scanned PICC's UID:");
     String uidString = String(rfid.uid.uidByte[0])+" "+String(rfid.uid.uidByte[1])+" "+String(rfid.uid.uidByte[2])+ " "+String(rfid.uid.uidByte[3]);
     Serial.println(uidString);
-    if(check_valid_tag(uidString)){
+    if(is_valid(uidString)){
       digitalWrite(RELE, HIGH);
       delay(2000);
       digitalWrite(RELE, LOW);
