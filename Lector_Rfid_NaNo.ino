@@ -2,11 +2,13 @@
 #include <SD.h>
 #include <MFRC522.h>
 #include "tag.h"
+#include "sd_manager.h";
 
 #define SDA 10
 #define SDA_2 8
 #define RST 9
 #define RELE 4
+#define SD_CARD 3
 
 
 //keys[4] = "197 239 203 45";
@@ -20,7 +22,8 @@ void setup() {
   SPI.begin();
   rfid_1.PCD_Init(); 
   rfid_2.PCD_Init(); 
-
+  if(!SD.begin(SD_CARD))
+    Serial.println("Error initializing sd card");
   Serial.println("Working.....");
 
 }
