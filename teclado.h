@@ -82,9 +82,9 @@ void erase_tag(){
     
     tmp = detect_key(prom, '1', 515, 550);
     tag_id = check(tmp, tag_id, '1');
-
-    
   }
+
+  delete_sd();
   
 
 }
