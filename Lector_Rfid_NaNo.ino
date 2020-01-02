@@ -1,5 +1,5 @@
 #include <SPI.h>
-#include <SD.h>
+
 #include <MFRC522.h>
 #include "tag.h"
 
@@ -16,8 +16,8 @@ MFRC522 rfid_2(SDA_2, RST);
 
 void setup() {
   Serial.begin(9600);
-  
   SPI.begin();
+  pinMode(RELE, OUTPUT);
   rfid_1.PCD_Init(); 
   rfid_2.PCD_Init(); 
   
@@ -25,11 +25,12 @@ void setup() {
 }
 
 void loop(){
+  input():
   if(rfid_1.PICC_IsNewCardPresent()){
      rfid_1.PICC_ReadCardSerial();
      check_incomin_tag(rfid_1);
   }
-  else if( rfid_2.PICC_IsNewCardPresent()){
+  else if(rfid_2.PICC_IsNewCardPresent()){
     rfid_2.PICC_ReadCardSerial();
     check_incomin_tag(rfid_2); 
   }
