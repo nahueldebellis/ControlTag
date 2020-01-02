@@ -3,24 +3,18 @@
 
 File tag_control_permanent_save;
 
-tag string_to_tag(String t){
-  char corte = ',';
-  String r[3];
-  int j=0;
-  
-  for(int i=0;i<3;i++){
-    String aux;
-    
-    while(t[j] != corte){       
-       aux = aux+String(t[j]);
-       j++;
-    }
-    j++; //salteo la coma
-    r[i] = aux;
-  }
 
-  tag ret = {r[0].toInt(), r[1], r[2]=="1"};
-  return ret;
+void write_sd(String tag_string){
+  
+  tag_control_permanent_save = SD.open("p.txt", FILE_WRITE);
+  
+  cant_tags++;  
+  tag t = {cant_tags,tag_string,1}; ///Si hay control horario modificar lo que se escribe en la tarjeta sd cuando se agrega aca
+  
+  if (tag_control_permanent_save)           
+    tag_control_permanent_save.println(tag_to_string(t));  
+  tag_control_permanent_save.close();
+
 }
 
 int calculate_tags(){
@@ -64,10 +58,4 @@ bool check_valid_tag(String incomin_tag){
   Serial.println("closing file");
   tag_control_permanent_save.close();
   return is_valid;
-}
-
-
-
-String tag_to_string(tag t){
-  return String(t.id)+","+t.uuid_tag+","+String(t.is_valid)+",";
 }
