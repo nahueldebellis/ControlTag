@@ -25,7 +25,7 @@ void setup() {
 }
 
 void loop(){
-  input():
+  
   if(rfid_1.PICC_IsNewCardPresent()){
      rfid_1.PICC_ReadCardSerial();
      check_incomin_tag(rfid_1);
