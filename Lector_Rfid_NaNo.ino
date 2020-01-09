@@ -31,7 +31,7 @@ void setup() {
 void loop(){
   //today = now();
   new_key();
-  if(rfid_1.PICC_IsNewCardPresent()){
+  if(rfid_1.PICC_IsNewCardPresent()){    
      rfid_1.PICC_ReadCardSerial();
      check_incomin_tag(rfid_1);
   }
@@ -47,7 +47,6 @@ void check_incomin_tag (MFRC522 rfid){
     String uidString = String(rfid.uid.uidByte[0])+" "+String(rfid.uid.uidByte[1])+" "+String(rfid.uid.uidByte[2])+ " "+String(rfid.uid.uidByte[3]);
     Serial.println(uidString);
     if(check_valid_tag(uidString)){
-      Serial.println("pasooooooooo");
       digitalWrite(RELE, HIGH);
       delay(2000);
       digitalWrite(RELE, LOW);
