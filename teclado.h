@@ -51,7 +51,6 @@ void erase_tag(){
 }
 
 void new_key() {
-    
     int val=0;
     for(int i=1;i<=20;i++)
       val += analogRead(A3);
@@ -63,7 +62,5 @@ void new_key() {
         add_tag();     
       else if(letter == "B\n")
         erase_tag();
-    }
-
-    
+    }    
 }
